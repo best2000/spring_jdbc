@@ -1,4 +1,4 @@
-package dev.danvega.model;
+package dev.danvega.model.Menu;
 
 public class Menu{
         private String app_name ;
@@ -38,6 +38,8 @@ public class Menu{
                 ", function_id=" + function_id +
                 '}';
     }
+
+
 
 
 }

@@ -1,6 +1,6 @@
 package dev.danvega.controller;
 
-import dev.danvega.model.AppMenu;
+import dev.danvega.model.Menu.AppMenu;
 import dev.danvega.model.Permission;
 import dev.danvega.model.User;
 import dev.danvega.service.AuthorizationService;

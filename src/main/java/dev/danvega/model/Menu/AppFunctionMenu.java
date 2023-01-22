@@ -1,10 +1,10 @@
-package dev.danvega.model;
+package dev.danvega.model.Menu;
 
-public class AppFunction {
+public class AppFunctionMenu {
     private Integer function_id;
     private String function_name;
 
-    public AppFunction(Integer function_id, String function_name) {
+    public AppFunctionMenu(Integer function_id, String function_name) {
         this.function_id = function_id;
         this.function_name = function_name;
     }

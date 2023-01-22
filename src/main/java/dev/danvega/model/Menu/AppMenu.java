@@ -1,13 +1,15 @@
-package dev.danvega.model;
+package dev.danvega.model.Menu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppMenu {
     private Integer app_id;
     private String app_name;
 
-    private List<AppFunction> functions;
+    private List<AppFunctionMenu> functions;
+
+    public AppMenu() {
+    }
 
     public AppMenu(Integer app_id, String app_name) {
         this.app_id = app_id;
@@ -31,11 +33,11 @@ public class AppMenu {
         this.app_name = app_name;
     }
 
-    public List<AppFunction> getFunctions() {
+    public List<AppFunctionMenu> getFunctions() {
         return functions;
     }
 
-    public void setFunctions(List<AppFunction> functions) {
+    public void setFunctions(List<AppFunctionMenu> functions) {
         this.functions = functions;
     }
 }
