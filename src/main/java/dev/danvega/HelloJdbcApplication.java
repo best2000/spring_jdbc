@@ -1,45 +1,54 @@
 package dev.danvega;
 
-import dev.danvega.dao.CourseJdbcDAO;
-import dev.danvega.dao.DAO;
-import dev.danvega.model.Course;
+import dev.danvega.model.User;
+import dev.danvega.model.Permission;
+import dev.danvega.repo.UserPermissionRepo;
+import dev.danvega.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
-import java.util.Optional;
-
-import static java.lang.System.*;
 
 @SpringBootApplication
 public class HelloJdbcApplication {
 
     private static final Logger log = LoggerFactory.getLogger(HelloJdbcApplication.class);
 
-    private static CourseJdbcDAO dao;
+//    dependency injection
+//    @Autowired
+    private static UserRepo userRepo;
+    private static UserPermissionRepo userPermissionRepo;
 
-    public HelloJdbcApplication(CourseJdbcDAO dao) {
-        this.dao = dao;
+    public HelloJdbcApplication(UserRepo userRepo, UserPermissionRepo userPermissionRepo) {
+        this.userRepo = userRepo;
+        this.userPermissionRepo = userPermissionRepo;
     }
 
     public static void main(String[] args) {
         SpringApplication.run(HelloJdbcApplication.class, args);
 
-        log.info("STARTED!");
+//        test userRepo methods
+        String msg = userRepo.echo("lol");
+        log.info("echo: {}",msg);
 
-        List<Course> courses = dao.list();
-        courses.forEach(System.out::println);
-
-        Optional<Course> course = dao.get(1);
-        if (course.isPresent()) {
-            Course exCourse = course.get();
-            log.info("course {} {} {}",exCourse.getId(),exCourse.getTitle(),exCourse.getTeacherId());
+        List<User> users = userRepo.list();
+        for (User user : users) {
+            log.info(user.toString());
         }
 
+//        test userPermissionRepo methods
+        Permission permission = new Permission(
+                users.get(1),
+                3,
+                "func1-app2"
+        );
+        log.info(permission.toString());
+        userPermissionRepo.checkPermission(permission);
+        log.info(permission.toString());
 
+        userPermissionRepo.getPermission(users.get(0));
     }
 
 }
