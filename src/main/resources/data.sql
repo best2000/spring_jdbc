@@ -1,18 +1,20 @@
-INSERT INTO user.user_detail(user_name) values ('Hand Solo'); --g1 g2 f1 f2 f3
-INSERT INTO user.user_detail(user_name) values ('Ho Solan'); --g1 f1 f2
-INSERT INTO user.user_detail(user_name) values ('Juja Blaka'); --none
+INSERT INTO user.user_detail(user_name) values ('Hand Solo');
+INSERT INTO user.user_detail(user_name) values ('Ho Solan');
+INSERT INTO user.user_detail(user_name) values ('Juja Blaka');
 
-INSERT INTO user.user_group(user_id, group_id) values (1,2);
 INSERT INTO user.user_group(user_id, group_id) values (1,1);
-INSERT INTO user.user_group(user_id, group_id) values (2,1);
+INSERT INTO user.user_group(user_id, group_id) values (2,2);
+INSERT INTO user.user_group(user_id, group_id) values (3,3);
 
-INSERT INTO ccwp.group_function(group_id, function_id) values (1,1);
-INSERT INTO ccwp.group_function(group_id, function_id) values (1,2);
-INSERT INTO ccwp.group_function(group_id, function_id) values (2,3);
+INSERT INTO ccwp.group_function(group_id, function_code) values (1,'10100');
+INSERT INTO ccwp.group_function(group_id, function_code) values (1,'10101');
+INSERT INTO ccwp.group_function(group_id, function_code) values (1,'10102');
+INSERT INTO ccwp.group_function(group_id, function_code) values (2,'20100');
 
-INSERT INTO ccwp.app_function(app_id,function_name) values (1, 'func1-app1');
-INSERT INTO ccwp.app_function(app_id, function_name) values (1, 'func2-app1');
-INSERT INTO ccwp.app_function(app_id, function_name) values (2, 'func1-app2');
+INSERT INTO ccwp.app_function(app_code,function_name,function_code) values ('CCWP', 'User Manage','10100');
+INSERT INTO ccwp.app_function(app_code, function_name,function_code) values ('CCWP', 'User Manage - add','10101');
+INSERT INTO ccwp.app_function(app_code, function_name,function_code) values ('CCWP', 'User Manage - delete','10102');
+INSERT INTO ccwp.app_function(app_code,function_name,function_code) values ('AIR', 'Calling','20100');
 
-INSERT INTO ccwp.app_detail(app_name) values ('First-App');
-INSERT INTO ccwp.app_detail(app_name) values ('Second-App');
+INSERT INTO ccwp.app_detail(app_name, app_code) values ('CCWP','CCWP');
+INSERT INTO ccwp.app_detail(app_name, app_code) values ('AIR','AIR web center');

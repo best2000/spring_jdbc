@@ -39,16 +39,16 @@ public class HelloJdbcApplication {
         }
 
 //        test userPermissionRepo methods
-        Permission permission = new Permission(
-                users.get(1),
-                3,
-                "func1-app2"
-        );
-        log.info(permission.toString());
-        userPermissionRepo.checkPermission(permission);
-        log.info(permission.toString());
-
-        userPermissionRepo.getPermission(users.get(0));
+//        Permission permission = new Permission(
+//                users.get(1),
+//                3,
+//                "func1-app2"
+//        );
+//        log.info(permission.toString());
+//        userPermissionRepo.checkPermission(permission);
+//        log.info(permission.toString());
+//
+//        userPermissionRepo.getPermission(users.get(0));
     }
 
 }
