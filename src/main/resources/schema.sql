@@ -3,13 +3,13 @@ CREATE SCHEMA ccwp AUTHORIZATION sa;
 
 CREATE TABLE user.user_detail (
     user_id integer identity NOT NULL,
-    user_name varchar(80) NOT NULL,
+    user_login varchar(80) NOT NULL,
     CONSTRAINT pk_app_detail_id PRIMARY KEY (user_id)
 );
 
 CREATE TABLE user.user_group (
     id integer identity NOT NULL,
-    user_id integer NOT NULL,
+    user_login varchar(80) NOT NULL,
     group_id integer NOT NULL,
     CONSTRAINT pk_user_group_id PRIMARY KEY (id)
 );

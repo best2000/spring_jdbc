@@ -1,10 +1,10 @@
-INSERT INTO user.user_detail(user_name) values ('Hand Solo');
-INSERT INTO user.user_detail(user_name) values ('Ho Solan');
-INSERT INTO user.user_detail(user_name) values ('Juja Blaka');
+INSERT INTO user.user_detail(user_login) values ('user1');
+INSERT INTO user.user_detail(user_login) values ('user2');
+INSERT INTO user.user_detail(user_login) values ('user3');
 
-INSERT INTO user.user_group(user_id, group_id) values (1,1);
-INSERT INTO user.user_group(user_id, group_id) values (2,2);
-INSERT INTO user.user_group(user_id, group_id) values (3,3);
+INSERT INTO user.user_group(user_login, group_id) values ('user1',1);
+INSERT INTO user.user_group(user_login, group_id) values ('user2',2);
+INSERT INTO user.user_group(user_login, group_id) values ('user3',3);
 
 INSERT INTO ccwp.group_function(group_id, function_code) values (1,'10100');
 INSERT INTO ccwp.group_function(group_id, function_code) values (1,'10101');

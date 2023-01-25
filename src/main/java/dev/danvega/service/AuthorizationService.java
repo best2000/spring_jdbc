@@ -42,12 +42,7 @@ public class AuthorizationService {
         return appMenuList;
     }
 
-    public Permission authorize(User user, Integer function_id) {
-        Permission permission = new Permission(
-                user,
-                function_id,
-                "?"
-        );
-        return userPermissionRepo.checkPermission(permission);
+    public Integer authorize(String userLogin, String appCode, String functionCode) {
+        return userPermissionRepo.checkUserPermission(userLogin,appCode,functionCode);
     }
 }

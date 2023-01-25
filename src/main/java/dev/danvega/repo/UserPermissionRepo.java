@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface UserPermissionRepo {
-    Permission checkPermission(Permission permission);
+    Integer checkUserPermission(String userLogin, String appCode, String functionCode);
 
     List<Menu> getPermission(User user);
 }

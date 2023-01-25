@@ -2,11 +2,11 @@ package dev.danvega.model;
 
 public class User {
     private Integer id;
-    private String name;
+    private String userLogin;
 
-    public User(Integer id, String name) {
+    public User(Integer id, String userLogin) {
         this.id = id;
-        this.name = name;
+        this.userLogin = userLogin;
     }
 
     public Integer getId() {
@@ -17,19 +17,19 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", userLogin='" + userLogin + '\'' +
                 '}';
     }
 }
