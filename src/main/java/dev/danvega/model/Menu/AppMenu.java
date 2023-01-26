@@ -3,26 +3,22 @@ package dev.danvega.model.Menu;
 import java.util.List;
 
 public class AppMenu {
-    private Integer app_id;
+    private String app_code;
     private String app_name;
+    private List<FunctionMenu> functions;
 
-    private List<AppFunctionMenu> functions;
-
-    public AppMenu() {
-    }
-
-    public AppMenu(Integer app_id, String app_name) {
-        this.app_id = app_id;
+    public AppMenu(String app_code, String app_name, List<FunctionMenu> functions) {
+        this.app_code = app_code;
         this.app_name = app_name;
-//        this.functions = functions;
+        this.functions = functions;
     }
 
-    public Integer getApp_id() {
-        return app_id;
+    public String getApp_code() {
+        return app_code;
     }
 
-    public void setApp_id(Integer app_id) {
-        this.app_id = app_id;
+    public void setApp_code(String app_code) {
+        this.app_code = app_code;
     }
 
     public String getApp_name() {
@@ -33,11 +29,11 @@ public class AppMenu {
         this.app_name = app_name;
     }
 
-    public List<AppFunctionMenu> getFunctions() {
+    public List<FunctionMenu> getFunctions() {
         return functions;
     }
 
-    public void setFunctions(List<AppFunctionMenu> functions) {
+    public void setFunctions(List<FunctionMenu> functions) {
         this.functions = functions;
     }
 }

@@ -1,4 +1,4 @@
-package dev.danvega.model.Menu;
+package dev.danvega.model;
 
 public class UserSession {
     private String userLogin;

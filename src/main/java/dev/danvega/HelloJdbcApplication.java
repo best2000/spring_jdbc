@@ -1,9 +1,12 @@
 package dev.danvega;
 
+import dev.danvega.model.Menu.AppFunction;
+import dev.danvega.model.Menu.AppMenu;
+import dev.danvega.model.ResponseTemplate.ResponseTemplate;
 import dev.danvega.model.User;
-import dev.danvega.model.Permission;
 import dev.danvega.repo.UserPermissionRepo;
 import dev.danvega.repo.UserRepo;
+import dev.danvega.service.AuthorizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -21,9 +24,12 @@ public class HelloJdbcApplication {
     private static UserRepo userRepo;
     private static UserPermissionRepo userPermissionRepo;
 
-    public HelloJdbcApplication(UserRepo userRepo, UserPermissionRepo userPermissionRepo) {
+    private static AuthorizationService authorizationService;
+
+    public HelloJdbcApplication(UserRepo userRepo, UserPermissionRepo userPermissionRepo, AuthorizationService authorizationService) {
         this.userRepo = userRepo;
         this.userPermissionRepo = userPermissionRepo;
+        this.authorizationService = authorizationService;
     }
 
     public static void main(String[] args) {
@@ -37,6 +43,12 @@ public class HelloJdbcApplication {
         for (User user : users) {
             log.info(user.toString());
         }
+
+        List<AppMenu> appMenus = authorizationService.getPermission("user1");
+        appMenus = authorizationService.getPermission("user2");
+        appMenus = authorizationService.getPermission("user3");
+
+//        log.info("echo: {}",responseTemplate.S);
 
 //        test userPermissionRepo methods
 //        Permission permission = new Permission(

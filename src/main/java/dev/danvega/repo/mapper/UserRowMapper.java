@@ -1,4 +1,4 @@
-package dev.danvega.repo;
+package dev.danvega.repo.mapper;
 
 import dev.danvega.model.User;
 import org.springframework.jdbc.core.RowMapper;

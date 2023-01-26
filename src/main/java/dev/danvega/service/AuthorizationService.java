@@ -1,9 +1,10 @@
 package dev.danvega.service;
 
 import dev.danvega.model.*;
-import dev.danvega.model.Menu.AppFunctionMenu;
+import dev.danvega.model.Menu.AppFunction;
 import dev.danvega.model.Menu.AppMenu;
-import dev.danvega.model.Menu.Menu;
+import dev.danvega.model.Menu.FunctionMenu;
+import dev.danvega.model.Menu.SubFunctionMenu;
 import dev.danvega.repo.UserPermissionRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,27 +20,56 @@ public class AuthorizationService {
     @Autowired
     private UserPermissionRepo userPermissionRepo;
 
-    public List<AppMenu> getPermission(User user) {
-        //get menu data according to user permission
-        List<Menu> menus = userPermissionRepo.getPermission(user);
-        //prepare menu object for front end (JSON)
-        List<AppMenu> appMenuList = new ArrayList<>();
-        List<AppFunctionMenu> appFunctionMenuList = new ArrayList<>();
-        AppMenu prevAppMenu = new AppMenu();
-        for (Menu menu : menus) {
-            AppMenu appMenu = new AppMenu(menu.getApp_id(), menu.getApp_name());
-            AppFunctionMenu appFunctionMenu = new AppFunctionMenu(menu.getFunction_id(), menu.getFunction_name());
-            if (prevAppMenu.getApp_name() != appMenu.getApp_name()) {
-                log.info("add app: {}", appMenu.getApp_name());
-                appMenuList.add(appMenu);
-                prevAppMenu.setFunctions(appFunctionMenuList);
-                appFunctionMenuList = new ArrayList<>();
-                prevAppMenu = appMenu;
+    public List<AppMenu> getPermission(String userLogin) {
+        log.info("AuthorizationService.getPermission => userLogin={}",userLogin);
+
+        List<AppFunction> appFunctions = userPermissionRepo.getPermission(userLogin);
+        List<AppMenu> appMenus = new ArrayList<>();
+        String app_code;
+        String app_name;
+        String function_code;
+        String function_name;
+        AppMenu lastAppMenu = null;
+        FunctionMenu lastFunctionMenu = null;
+
+        for (AppFunction appFunction : appFunctions) {
+            //update current loop vars
+            app_code = appFunction.getApp_code();
+            app_name = appFunction.getApp_name();
+            function_code = appFunction.getFunction_code();
+            function_name = appFunction.getFunction_name();
+
+            log.info("app_code={}, app_name={}, function_code={}, function_name={}",app_code,app_name,function_code,function_name);
+
+            System.out.println("check AppMenu");
+            //if last appMenus element not the same as current appMenu
+            if (appMenus.isEmpty()
+                    || !(appMenus.get(appMenus.size() - 1).getApp_code()).equals(app_code)) {
+                System.out.println("add to AppMenu");
+                //add new 'AppMenu' to 'appMenus' list
+                appMenus.add(new AppMenu(app_code, app_name, new ArrayList<>()));
             }
-            appFunctionMenuList.add(appFunctionMenu);
+            //update var
+            lastAppMenu = appMenus.get(appMenus.size() - 1);
+
+            System.out.println("check Function");
+            //if function_code is 'FunctionMenu' of last 'AppMenu' in 'appMenus' list
+            if ((function_code.substring(function_code.length() - 2).equals("00"))
+                    && (app_code.equals(lastAppMenu.getApp_code()))) {
+                System.out.println("add to function");
+                //add new 'FunctionMenu' to last 'AppMenu'
+                lastAppMenu.getFunctions().add(new FunctionMenu(function_code, function_name, new ArrayList<SubFunctionMenu>()));
+                lastFunctionMenu = lastAppMenu.getFunctions().get(lastAppMenu.getFunctions().size() - 1);
+            }
+            //else if function_code is 'SubFunctionMenu' of last 'FunctionMenu'
+            else if ((function_code.substring(0,3).equals(lastFunctionMenu.getFunction_code().substring(0,3)))
+                    && (app_code.equals(lastAppMenu.getApp_code()))){
+                System.out.println("add to sub_function");
+                //add new 'SubFunctionMenu' to last 'FunctionMenu'
+                lastFunctionMenu.getSub_functions().add(new SubFunctionMenu(function_code, function_name));
+            }
         }
-        prevAppMenu.setFunctions(appFunctionMenuList);
-        return appMenuList;
+        return appMenus;
     }
 
     public Integer authorize(String userLogin, String appCode, String functionCode) {
