@@ -16,5 +16,5 @@ INSERT INTO ccwp.app_function(app_code, function_name,function_code) values ('CC
 INSERT INTO ccwp.app_function(app_code, function_name,function_code) values ('CCWP', 'User Manage - delete','10102');
 INSERT INTO ccwp.app_function(app_code,function_name,function_code) values ('AIR', 'Calling','20100');
 
-INSERT INTO ccwp.app_detail(app_name, app_code) values ('CCWP','CCWP');
-INSERT INTO ccwp.app_detail(app_name, app_code) values ('AIR','AIR web center');
+INSERT INTO ccwp.app_detail(app_code, app_name ) values ('CCWP','CCWP');
+INSERT INTO ccwp.app_detail(app_code, app_name) values ('AIR','AIR web center');

@@ -32,6 +32,8 @@ public class AuthorizationService {
         AppMenu lastAppMenu = null;
         FunctionMenu lastFunctionMenu = null;
 
+        System.out.println(appFunctions.size());
+
         for (AppFunction appFunction : appFunctions) {
             //update current loop vars
             app_code = appFunction.getApp_code();
